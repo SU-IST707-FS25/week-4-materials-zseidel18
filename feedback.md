@@ -1,70 +1,65 @@
-# Assignment Feedback: Week 4: Dimensionality Reduction
+# Assignment Feedback: Week 04 Dimensionality Reduction
 
 **Student:** zseidel18
-**Total Score:** 18/33 (54.5%)
-
-**Grade Category:** F (Failing)
+**Raw Score:** 39/40 (97.5%)
+**Course Points Earned:** 72.0
 
 ---
 
 ## Problem Breakdown
 
-### Exercise 1 (5/16 = 31.2%)
-
-**Part pipeline-part2** (pipeline-part2.code): 2/4 points
-
-_Feedback:_ You correctly applied PCA and produced a scree plot. However, the task required a 2D scatter of the first two principal components colored by class labels. No 2D scatter or coloring by y was provided. Plot X_pca[:,0] vs X_pca[:,1] with c=y to meet the spec.
-
-**Part pipeline-part3** (pipeline-part3.code): 1/4 points
-
-_Feedback:_ You computed components for 95% variance, but the task was to calculate and visualize a scree plot for the first 40 components with percent variance explained on the y-axis. No plot was produced and you didn’t use the prior pca (40 comps). Plot pca.explained_variance_ratio_[:40].
-
-**Part pipeline-part4** (pipeline-part4.code): 1/4 points
-
-_Feedback:_ You used PCA and reconstruction, but you didn’t calculate or report the number of components needed to explain 95% variance as asked. Use explained_variance_ratio_ or PCA(n_components=0.95) and print pca_95.n_components_. Also, inverse_transform expects 2D; pass X_train[0:1], not
-
-**Part pipeline-part5** (pipeline-part5.code): 1/4 points
-
-_Feedback:_ This does not address Step 5. You should reduce a digit using the dimensions from Step 4 (e.g., your 149 comps), inverse_transform it, and plot with plot_mnist_digit. Your code runs KNN and PCA for classification instead, with no visualization or reconstruction.
-
----
-
 ### Exercise 2 (10/10 = 100.0%)
 
 **Part ex1-part1** (ex1-part1.code): 4/4 points
 
-_Feedback:_ Good solution: subsamples data, reduces to 50D with PCA, then applies 2D t-SNE and visualizes with labels and colorbar. Sensible params (init='pca', random_state) and clear plot. Ensure X/y refer to MNIST data defined earlier. Full credit.
+_Feedback:_ Good job: sensible subsampling, PCA pre-reduction, t-SNE to 2D, and clear scatter with labels/colorbar. This meets the goal. Just ensure X/y refer to the MNIST data and remember plt.show() if needed in your environment.
 
 **Part ex1-part2** (ex1-part2.code): 3/3 points
 
-_Feedback:_ Good job: you applied t-SNE (after PCA) and evaluated KNN accuracy, and you correctly noted the data leakage from fitting t-SNE on combined train+test. For a fair eval, avoid leakage (e.g., use a validation split or acknowledge it as exploratory).
+_Feedback:_ Good job: you reduced with PCA, applied t-SNE, trained KNN, and reported accuracy. Note the acknowledged data leakage from fitting t-SNE on combined train+test; prefer fitting on train only (though t-SNE lacks transform). Otherwise solid implementation.
 
 **Part ex1-part3** (ex1-part3.code): 3/3 points
 
-_Feedback:_ Good job computing KNN accuracy. You properly fit UMAP on the training set and transformed the test set before KNN, avoiding leakage. Minor: the initial fit_transform on X is redundant and can be removed to save time.
+_Feedback:_ Good job: you used UMAP, trained KNN on the UMAP-transformed train set, and evaluated accuracy on the transformed test set. No data leakage in the final pipeline. Minor: the initial fit_transform on X is redundant; you can remove it for efficiency.
 
 ---
 
-### Exercise 4 (3/7 = 42.9%)
+### Exercise 4 (14/14 = 100.0%)
 
-**Part ex2-part1** (ex2-part1.code): 0/0 points
+**Part ex2-part1** (ex2-part1.code): 7/7 points
 
-_Feedback:_ Good PCA exploration: varied components (1–3), evaluated KNN accuracy, and visualized embeddings. However, you didn’t implement UMAP, vary its parameters (e.g., n_neighbors, min_dist, n_components), or compare KNN performance vs PCA. Add UMAP runs and visualizations to complete.
+_Feedback:_ Well done. You applied PCA with multiple component counts, trained KNN, and reported accuracies. Your visualizations for 1–3 PCs are appropriate and informative. For refinement, consider inspecting explained_variance_ratio_ and plotting on train-only data, but no points off.
 
-**Part ex2-part2** (ex2-part2.code): 3/7 points
+**Part ex2-part2** (ex2-part2.code): 7/7 points
 
-_Feedback:_ You implemented UMAP with KNN and clear visualizations—good technique and likely works. However, the task explicitly asked to try PCA (and to leverage your prior PCA work); you didn’t include PCA here. Explanation is generic and not tied to shown PCA results. Add PCA runs to earn
+_Feedback:_ Strong work: you implemented UMAP with varied n_components/n_neighbors/min_dist, trained KNN on embeddings, evaluated accuracy, and visualized 1D/2D/3D cases. Explanation addresses PCA vs UMAP reasonably. No issues noted. Full credit.
+
+---
+
+### Exercise 1 (15/16 = 93.8%)
+
+**Part pipeline-part2** (pipeline-part2.code): 4/4 points
+
+_Feedback:_ Good job. You fit PCA with 40 components and plotted the explained_variance_ratio_ over components 1–40. This correctly produces a scree plot of proportion of variance explained. Labels and formatting are acceptable for this task.
+
+**Part pipeline-part3** (pipeline-part3.code): 4/4 points
+
+_Feedback:_ Correct approach. Using PCA(n_components=0.95) and reporting n_components_ correctly computes the number of components to explain 95% variance. Full credit.
+
+**Part pipeline-part4** (pipeline-part4.code): 3/4 points
+
+_Feedback:_ Good reconstruction and visualization pipeline. However, you hard-coded 149 components instead of using the number identified in Step 4 (e.g., pca_95.n_components_). Minor redundancy using fit_transform then transform. Otherwise correct approach.
+
+**Part pipeline-part5** (pipeline-part5.code): 4/4 points
+
+_Feedback:_ Good job. You ran KNN on original data and with PCA preserving ~80% variance, fitting PCA on train and transforming test, and reported both accuracies. Choice of k=10 is fine. Meets the task’s objectives.
 
 ---
 
 ## Additional Information
 
-This feedback was automatically generated by the autograder using LLM-based evaluation.
+This feedback was automatically generated by the autograder.
 
-**Generated:** 2025-10-27 18:51:24 UTC
+**Generated:** 2025-10-28 19:51:53 UTC
 
 If you have questions about your grade, please reach out to the instructor.
-
----
-
-*Powered by [Grade-Lite](https://github.com/your-repo/grade-lite) Autograder*
